@@ -51,6 +51,7 @@ add_library(HIDCONTROL SHARED
     ${PROJECT_SOURCE_DIR}/driver/include/misc.h)
 target_link_libraries(HIDCONTROL -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  -fpermissive -w -O3)
 
+# example
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/driver/include ${PROJECT_SOURCE_DIR}/driver/src/hid_control)
 add_executable(blur_estimate ${PROJECT_SOURCE_DIR}/demo/blur_estimate.cpp)
