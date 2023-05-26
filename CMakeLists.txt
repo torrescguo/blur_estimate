@@ -57,6 +57,7 @@ add_executable(blur_estimate ${PROJECT_SOURCE_DIR}/demo/blur_estimate.cpp)
 add_executable(demo ${PROJECT_SOURCE_DIR}/demo/demo.cpp)
 add_executable(pointShow ${PROJECT_SOURCE_DIR}/demo/pointShow.cpp)
 add_executable(fastDetector ${PROJECT_SOURCE_DIR}/demo/fastDetector.cpp)
+add_executable(yuv420torgb ${PROJECT_SOURCE_DIR}/demo/yuv420torgb.cpp )
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
@@ -79,6 +80,7 @@ target_link_libraries(blur_estimate ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-
 target_link_libraries(demo ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  -fpermissive -w -O3)
 target_link_libraries(pointShow ${OpenCV_LIBS} -fpermissive -w -O3)
 target_link_libraries(fastDetector ${OpenCV_LIBS} ${TARGET_LIBRARY_PATH} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut -fpermissive -w -O3)
+target_link_libraries(yuv420torgb ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  -fpermissive -w -O3)
 # ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES} 
 target_link_libraries(depth2pointcloud ${OpenCV_LIBS}  ${PCL_LIBRARIES} -fpermissive -w -O3)
 target_link_libraries(showPointCloud ${PCL_LIBRARIES} ${PCL_VISUALIZATION_LIB} -fpermissive -w -O3)
