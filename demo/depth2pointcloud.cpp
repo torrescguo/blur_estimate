@@ -1,4 +1,4 @@
-#include "./driver/include/depth2pointcloud.h"
+#include "../driver/include/depth2pointcloud.h"
 using namespace DepthToPCL;
 
 // 定义点云类型
@@ -22,10 +22,10 @@ int DepthToPCL::Depth_TO_PointCloud()
 	cv::Mat rgb, depth;
 	// 使用cv::imread()来读取图像
 	// API: http: //docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html?highlight=imread#cv2.imread
-	rgb = cv::imread("../rgb.png");
+	rgb = cv::imread("../data/rgb.png");
 	// rgb 图像是8UC3的彩色图像
 	// depth 是16UC1的单通道图像，注意flags设置-1,表示读取原始数据不做任何修改
-	depth = cv::imread("../depth.png", -1);
+	depth = cv::imread("../data/depth.png", -1);
 
 	// 点云变量
 	// 使用智能指针，创建一个空点云。这种指针用完会自动释放。
@@ -61,7 +61,7 @@ int DepthToPCL::Depth_TO_PointCloud()
 	cloud->width = cloud->points.size();
 	cout << "point cloud size = " << cloud->points.size() << endl;
 	cloud->is_dense = false;
-	pcl::io::savePCDFile("../0.335166.pcd", *cloud);
+	pcl::io::savePCDFile("../data/0.335166.pcd", *cloud);
 	// 清除数据并退出
 	cloud->points.clear();
 	cout << "Point cloud saved." << endl;

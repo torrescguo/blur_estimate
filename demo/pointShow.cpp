@@ -12,7 +12,7 @@ using namespace cv;
 // circle(image1, points1, 3, Scalar(0, 255, 120), -1);//画点，其实就是实心圆
 
 int main(){
-	Mat image1 = imread("../640x800.jpg", 1);//路径根据自己的改
+	Mat image1 = imread("../data/640x800.jpg", 1);//路径根据自己的改
 	vector<Point2f> points1;
 	/*我的图是640*480的，所以以下生成点注意一下数据范围
 	.......

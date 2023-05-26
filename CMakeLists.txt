@@ -53,16 +53,16 @@ target_link_libraries(HIDCONTROL -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  
 
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/driver/include ${PROJECT_SOURCE_DIR}/driver/src/hid_control)
-add_executable(blur_estimate blur_estimate.cpp)
-add_executable(demo demo.cpp)
-add_executable(pointShow pointShow.cpp)
-add_executable(fastDetector fastDetector.cpp)
+add_executable(blur_estimate ${PROJECT_SOURCE_DIR}/demo/blur_estimate.cpp)
+add_executable(demo ${PROJECT_SOURCE_DIR}/demo/demo.cpp)
+add_executable(pointShow ${PROJECT_SOURCE_DIR}/demo/pointShow.cpp)
+add_executable(fastDetector ${PROJECT_SOURCE_DIR}/demo/fastDetector.cpp)
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
-add_executable(depth2pointcloud depth2pointcloud.cpp)
-add_executable(showPointCloud showPointCloud.cpp)
+add_executable(depth2pointcloud ${PROJECT_SOURCE_DIR}/demo/depth2pointcloud.cpp)
+add_executable(showPointCloud ${PROJECT_SOURCE_DIR}/demo/showPointCloud.cpp)
 
 set(TARGET_LIBRARY_PATH 
     ${PROJECT_SOURCE_DIR}/libs/libHELLO.so

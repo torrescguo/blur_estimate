@@ -5,9 +5,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/imgproc/types_c.h>
 #include <opencv2/highgui/highgui.hpp>
-#include "./driver/include/uvc_cam_sdk.h"
-#include "./driver/include/bmp.h"
-#include "./driver/src/hid_control/hid_control.hpp"
+#include "../driver/include/uvc_cam_sdk.h"
+#include "../driver/include/bmp.h"
+#include "../driver/src/hid_control/hid_control.hpp"
 
 using namespace std;
 using namespace cv;

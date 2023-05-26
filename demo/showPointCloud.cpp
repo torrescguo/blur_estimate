@@ -35,7 +35,7 @@
     main ()  
     {  
         pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGBA>);  
-        pcl::io::loadPCDFile ("../0.335166.pcd", *cloud);
+        pcl::io::loadPCDFile ("../data/0.335166.pcd", *cloud);
           
         pcl::visualization::CloudViewer viewer("Cloud Viewer");  
           

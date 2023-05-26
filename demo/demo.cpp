@@ -5,20 +5,10 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/imgproc/types_c.h>
 #include <math.h>
-
-// #include "./driver/uvc_cam_sdk.h"
-//  #include "./driver/bmp.h"
- #include "./driver/include/hello.h"
+#include "../driver/include/hello.h"
 using namespace std;
 using namespace cv;
 
-
-// void start_uvc_camera()
-// {
-//     char path_f408_firstNode[50];
-//     udev_search_node(path_f408_firstNode,0);
-//     uvc_camera_sdk_init(path_f408_firstNode,640,800,1);
-// }
 #define GAMMA_VALUE 2.2
 uint8_t gamma_lut[256];
 void generate_gamma_lut(uint8_t *lut,float gamma_value)
@@ -59,7 +49,7 @@ int main()
     uint8_t rawbuff[640*400*4];
     uint8_t * second_start = rawbuff + 640*800;
 
-	read_data_toFile("../640*800.raw",rawbuff,640*400*2);//imread("../640x800.jpg");
+	read_data_toFile("../data/640*800.raw",rawbuff,640*400*2);//imread("../640x800.jpg");
     memcpy(second_start,rawbuff,640*400*2);
 	cout << "********************" << endl;
     Mat imageSource = cv::Mat(cv::Size(640,400*2), CV_8UC1, second_start);

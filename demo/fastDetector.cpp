@@ -4,7 +4,7 @@
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
 
-#include "./driver/include/uvc_cam_sdk.h"
+#include "../driver/include/uvc_cam_sdk.h"
 // #include "./driver/include/bmp.h"
 // #include "./driver/src/hid_control/hid_control.hpp"
 
