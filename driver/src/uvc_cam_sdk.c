@@ -286,7 +286,7 @@ void udev_search_node(char * path_f408_firstNode,int order)
     /* Create a list of the devices in the 'hidraw' subsystem. */
     enumerate = udev_enumerate_new(udev);
 //     udev_enumerate_add_match_subsystem(enumerate, "");
-//      udev_enumerate_add_match_sysattr(enumerate,"idProduct","f408"); //"manufacturer","SIUPO"
+    //  udev_enumerate_add_match_sysattr(enumerate,"idProduct","f408"); //"manufacturer","SIUPO"
       udev_enumerate_add_match_subsystem(enumerate, "video4linux");
     udev_enumerate_scan_devices(enumerate);
     devices = udev_enumerate_get_list_entry(enumerate);

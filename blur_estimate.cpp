@@ -22,6 +22,8 @@ void start_uvc_camera()
 {
     char path_f408_firstNode[50];
     udev_search_node(path_f408_firstNode,0);
+
+    cout << "hhhhhhh" << path_f408_firstNode << endl;
     uvc_camera_sdk_init(path_f408_firstNode,640,800,1);
 }
 void save_data_toBMP(const char * path,uint8_t * mem,uint32_t width,uint32_t height)
@@ -174,6 +176,8 @@ int main_blur_estimate()
         double meanValueOri = 0.0;
         meanValue = mean(imageSobel)[0];
         meanValueOri = mean(imageSobelOri)[0];
+
+        cout << "sobel size :" << imageSobel.size << endl;
     
         //double to string
         stringstream meanValueStream,meanValueStreamOri;

@@ -12,6 +12,7 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 add_definitions(-DMULTI_API_VERSION)
 find_package( OpenCV REQUIRED )
+find_package( PCL 1.3 REQUIRED COMPONENTS common io )
 
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/libs)
@@ -53,6 +54,15 @@ target_link_libraries(HIDCONTROL -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/driver/include ${PROJECT_SOURCE_DIR}/driver/src/hid_control)
 add_executable(blur_estimate blur_estimate.cpp)
+add_executable(demo demo.cpp)
+add_executable(pointShow pointShow.cpp)
+add_executable(fastDetector fastDetector.cpp)
+
+include_directories(${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+add_executable(depth2pointcloud depth2pointcloud.cpp)
+add_executable(showPointCloud showPointCloud.cpp)
 
 set(TARGET_LIBRARY_PATH 
     ${PROJECT_SOURCE_DIR}/libs/libHELLO.so
@@ -60,4 +70,16 @@ set(TARGET_LIBRARY_PATH
     ${PROJECT_SOURCE_DIR}/libs/libBMP.so
     ${PROJECT_SOURCE_DIR}/libs/libHIDCONTROL.so)
 
+
+# show pointcloud ,can not find libpcl_visualization.so
+set (PCL_VISUALIZATION_LIB
+    "/usr/local/lib/libpcl_visualization.so")
+
 target_link_libraries(blur_estimate ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  -fpermissive -w -O3)
+target_link_libraries(demo ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  -fpermissive -w -O3)
+target_link_libraries(pointShow ${OpenCV_LIBS} -fpermissive -w -O3)
+target_link_libraries(fastDetector ${OpenCV_LIBS} ${TARGET_LIBRARY_PATH} -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut -fpermissive -w -O3)
+# ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES} 
+target_link_libraries(depth2pointcloud ${OpenCV_LIBS}  ${PCL_LIBRARIES} -fpermissive -w -O3)
+target_link_libraries(showPointCloud ${PCL_LIBRARIES} ${PCL_VISUALIZATION_LIB} -fpermissive -w -O3)
+
