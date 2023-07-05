@@ -106,7 +106,7 @@ int main_rotation()
             }
             
          }
-    #if 0
+    #if 1
          save_data_toFile("recordu8.raw",uvc_frame->head.start,640*800);
          save_data_toBMP("record_left.bmp",uvc_frame->head.start,640,400);
          save_data_toBMP("record_right.bmp",uvc_frame->head.start+640*400,640,400);
@@ -209,7 +209,8 @@ int main()
 {
     int ret = 0;
 
-    ret = main_blur_estimate();
+    // ret = main_blur_estimate();
+    ret = main_rotation();
 
     return ret;
     

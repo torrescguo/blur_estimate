@@ -5,6 +5,7 @@ project(BlurEstimate C CXX)
 set ( CMAKE_BUILD_TYPE "Release")
 
 set( CMAKE_CXX_FLAGS "-std=c++11" )
+# set(CMAKE_CXX_STANDARD 14)
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 # set( CMAKE_CXX_FLAGS "-O3" )
@@ -12,7 +13,9 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 add_definitions(-DMULTI_API_VERSION)
 find_package( OpenCV REQUIRED )
-find_package( PCL 1.3 REQUIRED COMPONENTS common io )
+find_package( PCL  REQUIRED COMPONENTS common io )
+find_package(Eigen3 REQUIRED)
+find_package(Pangolin REQUIRED)
 
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/libs)
@@ -54,6 +57,7 @@ target_link_libraries(HIDCONTROL -lusb-1.0 -ludev -lpthread  -lGL -lGLU -lglut  
 # example
 
 include_directories(${OpenCV_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/driver/include ${PROJECT_SOURCE_DIR}/driver/src/hid_control)
+include_directories("/usr/include/eigen3")
 add_executable(blur_estimate ${PROJECT_SOURCE_DIR}/demo/blur_estimate.cpp)
 add_executable(demo ${PROJECT_SOURCE_DIR}/demo/demo.cpp)
 add_executable(pointShow ${PROJECT_SOURCE_DIR}/demo/pointShow.cpp)
@@ -61,11 +65,16 @@ add_executable(fastDetector ${PROJECT_SOURCE_DIR}/demo/fastDetector.cpp)
 add_executable(yuv420torgb ${PROJECT_SOURCE_DIR}/demo/yuv420torgb.cpp )
 add_executable(orbFeature ${PROJECT_SOURCE_DIR}/demo/orbFeature.cpp)
 
-include_directories(${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${Pangolin_INCLUDE_DIRS} )
+# include_directories("/usr/local/include/pcl-1.13/pcl")
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 add_executable(depth2pointcloud ${PROJECT_SOURCE_DIR}/demo/depth2pointcloud.cpp)
 add_executable(showPointCloud ${PROJECT_SOURCE_DIR}/demo/showPointCloud.cpp)
+add_executable(pointCloud ${PROJECT_SOURCE_DIR}/demo/pointCloud.cpp)
+add_executable(stereoMatch ${PROJECT_SOURCE_DIR}/demo/stereoMatch.cpp)
+add_executable(sgbm  ${PROJECT_SOURCE_DIR}/demo/sgbm.cpp)
+
 
 set(TARGET_LIBRARY_PATH 
     ${PROJECT_SOURCE_DIR}/libs/libHELLO.so
@@ -86,5 +95,11 @@ target_link_libraries(yuv420torgb ${TARGET_LIBRARY_PATH} ${OpenCV_LIBS} -lusb-1.
 # ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES} 
 target_link_libraries(depth2pointcloud ${OpenCV_LIBS}  ${PCL_LIBRARIES} -fpermissive -w -O3)
 target_link_libraries(showPointCloud ${PCL_LIBRARIES} ${PCL_VISUALIZATION_LIB} -fpermissive -w -O3)
+target_link_libraries(pointCloud ${OpenCV_LIBS}  ${Pangolin_LIBRARIES} ${PCL_LIBRARIES}  ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES}  ${PCL_VISUALIZATION_LIB} ${TARGET_LIBRARY_PATH} -fpermissive -w -O3)
+target_link_libraries(stereoMatch ${OpenCV_LIBS}  ${Pangolin_LIBRARIES} ${PCL_LIBRARIES}  ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES}  ${PCL_VISUALIZATION_LIB} ${TARGET_LIBRARY_PATH} -fpermissive -w -O3)
+
+# target_link_libraries(pointCloud ${OpenCV_LIBS}  ${Pangolin_LIBRARIES} ${TARGET_LIBRARY_PATH} -fpermissive -w -O3)
+
 target_link_libraries(orbFeature ${OpenCV_LIBS} -fpermissive -w -O3)
+target_link_libraries(sgbm ${OpenCV_LIBS} -fpermissive -w -O3)
 
